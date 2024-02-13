@@ -8,14 +8,29 @@ const Paciente = ({paciente}) => {
     const { email, fecha_alta, nombre, propietario, sintomas, _id } = paciente
     
     //formatear fecha
-   const formatearFecha =(fecha) => {
+    /*const formatearFecha =(fecha) => {
         const nuevaFecha = new Date(fecha)
         return Intl.DateTimeFormat('es-ES', {dateStyle: 'long'}).format(nuevaFecha)      
 
-    }
+    }*/
 
-    //new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-// "Friday, Jul 2, 2021"
+        // formatear fecha
+        const formatearFecha = (fecha) => {
+            let nuevaFecha
+            if (fecha.includes('T00:00:00.000Z')) {
+                nuevaFecha = new Date(fecha.split('T')[0].split('-'))
+            } else {
+                nuevaFecha = new Date(fecha)
+            }
+            const opciones = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }
+            return nuevaFecha.toLocaleDateString('es-ES', opciones)
+          }
+
+    
 
   return (
 
