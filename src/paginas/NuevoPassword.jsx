@@ -7,6 +7,7 @@ import clienteAxios from "../../config/axios"
 const NuevoPassword = () => {
   const [password, setPassword] = useState("");
   const [repetirPassword, setRepetirPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [alerta, setAlerta] = useState({});
   const [tokenValido, setTokenValido] = useState(false);
   const [passwordModificado, setPasswordModificado] = useState(false)
@@ -65,6 +66,11 @@ const NuevoPassword = () => {
             
 
     }
+
+    //mostrar checkbox password
+  const handleCheckboxChange = () => {
+    setShowPassword(!showPassword);
+  };
     
 
     const { msg } = alerta;
@@ -95,14 +101,14 @@ const NuevoPassword = () => {
                 Nuevo Password
               </label>
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Tu Nuevo Password"
                 className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-
+            
             <div className="my-5">
               <label
                 htmlFor=""
@@ -111,13 +117,26 @@ const NuevoPassword = () => {
                 Repite tu Password
               </label>
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Repite tu Password"
                 className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
                 value={repetirPassword}
                 onChange={(e) => setRepetirPassword(e.target.value)}
               />
+
+                <input
+                    type="checkbox"
+                    id="showPassword"
+                    className="ml-2 mt-5"
+                    checked={showPassword}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="showPassword" className="ml-1  text-gray-500">
+                    Mostrar Password
+                  </label>
             </div>
+
+            
 
             <input
               type="submit"

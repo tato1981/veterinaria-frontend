@@ -9,6 +9,7 @@ const CambiarPassword = () => {
   const {guardarPassword} = useAuth()
 
   const  [alerta, setAlerta] = useState({})
+  const [showPassword, setShowPassword] = useState(false);
   const  [password, setPassword] = useState({
     pwd_actual: '',
     pwd_nuevo: '',
@@ -45,11 +46,14 @@ const CambiarPassword = () => {
 }
 
   const respuesta = await guardarPassword(password)
-  setAlerta(respuesta)
-
-  
+  setAlerta(respuesta)  
 
 }
+
+//mostrar checkbox password
+const handleCheckboxChange = () => {
+  setShowPassword(!showPassword);
+};
 
   const {msg} = alerta;
 
@@ -75,7 +79,7 @@ const CambiarPassword = () => {
                         <div className="my-3">
                             <label className="uppercase font-bold text-gray-600">Password Actual</label>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 className="border bg-gray-50 w-full p-2 mt-5 rounded-lg "
                                 name="pwd_actual"
                                 placeholder="Escribe tu password actual"
@@ -90,7 +94,7 @@ const CambiarPassword = () => {
                         <div className="my-3">
                             <label className="uppercase font-bold text-gray-600">password Nuevo</label>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 className="border bg-gray-50 w-full p-2 mt-5 rounded-lg "
                                 name="pwd_nuevo"
                                 placeholder="Escribe tu nuevo password"
@@ -104,7 +108,7 @@ const CambiarPassword = () => {
                         <div className="my-3">
                             <label className="uppercase font-bold text-gray-600">Repetir password Nuevo</label>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 className="border bg-gray-50 w-full p-2 mt-5 rounded-lg "
                                 name="pwd_repetir"
                                 placeholder="Repetir password nuevo"
@@ -113,6 +117,17 @@ const CambiarPassword = () => {
                                   [e.target.name] : e.target.value
                                 })}
                             />
+
+                            <input
+                                type="checkbox"
+                                id="showPassword"
+                                className="ml-2 mt-5"
+                                checked={showPassword}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label htmlFor="showPassword" className="ml-1  text-gray-500">
+                                Mostrar Password
+                              </label>
                         </div>
 
 
