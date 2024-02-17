@@ -7,7 +7,8 @@ const AuthContext = createContext();
 const AuthProvider = ({children}) => {
 
     const [cargando, setCargando] = useState(true)
-    const [auth, setAuth] = useState({})  
+    const [auth, setAuth] = useState({})
+    const [userEmail, setUserEmail] = useState('');  
 
    // const navigate = useNavigate()
 
@@ -31,7 +32,8 @@ const AuthProvider = ({children}) => {
             try {
                 const {data} = await clienteAxios('/veterinarios/perfil', config)
                     setAuth(data)
-                    //navigate('/admin')                
+                    //navigate('/admin') 
+                    setUserEmail(data.email)               
 
             } catch (error) {
                 console.log(error.response.data.msg)
@@ -106,7 +108,7 @@ const AuthProvider = ({children}) => {
             const url = `/veterinarios/actualizar-password`
             const {data} = await clienteAxios.put(url, datos, config)
             //console.log(data)
-
+            
             return {
                 msg: data.msg
             }
@@ -120,7 +122,7 @@ const AuthProvider = ({children}) => {
     }
 
    
-
+    
     
 
 
@@ -133,7 +135,8 @@ const AuthProvider = ({children}) => {
                 cargando,
                 cerrarSesion,
                 actualizarPerfil,
-                guardarPassword
+                guardarPassword,
+                userEmail, setUserEmail
                 
             }}
         

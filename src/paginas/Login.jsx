@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import Footer from '../components/Footer'
 import Alerta from '../components/Alerta'
 import useAuth from '../hook/useAuth'
 import clienteAxios from '../../config/axios';
@@ -57,7 +58,7 @@ const Login = () => {
 
       
           <div>
-            <h1 className="text-indigo-600 font-black text-4xl md:text-6xl">
+            <h1 className="text-indigo-600 font-black text-4xl md:text-7xl">
               Inicia Sesión y Administra tus {''}
               <span className="text-black"> Pacientes </span> 
             </h1> 
@@ -133,8 +134,7 @@ const Login = () => {
                   to="/olvide-password">Olvidaste tu password?</Link>
               </nav>
 
-          </div>
-     
+          </div>                   
     </>
   )
 }
